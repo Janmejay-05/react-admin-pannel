@@ -1,0 +1,67 @@
+{
+  "product": [
+    {
+      "id": "12",
+      "name": "Sneaker",
+      "url": "https://m.media-amazon.com/images/I/614aiM56siL._SY695_.jpg",
+      "category": "Shoes",
+      "price": 9000
+    },
+    {
+      "id": "13",
+      "name": "Running Shoes",
+      "url": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/312090/01/sv01/fnd/IND/fmt/png/Cell-Fraction-Fade-Men's-Running-Shoes",
+      "category": "Shoes",
+      "price": 8500
+    },
+    {
+      "id": "14",
+      "name": "Leather Jacket",
+      "url": "https://www.voganow.com/cdn/shop/files/BBGJ-1108-014_2_copy.jpg?v=1740144445&width=600",
+      "category": "Clothing",
+      "price": 12000
+    },
+    {
+      "id": "15",
+      "name": "Smart Watch",
+      "url": "https://www.gonoise.com/cdn/shop/files/1_c95e5561-4f66-413d-b143-42d31821e554.webp?v=1721392308",
+      "category": "Electronics",
+      "price": 11000
+    },
+    {
+      "id": "16",
+      "name": "Laptop",
+      "url": "https://m.media-amazon.com/images/I/71DozMyPCBL._SX679_.jpg",
+      "category": "Electronics",
+      "price": 55000
+    },
+    {
+      "id": "17",
+      "name": "Bluetooth Headphones",
+      "url": "https://m.media-amazon.com/images/I/31PFiCIw3WL._SX300_SY300_QL70_FMwebp_.jpg",
+      "category": "Electronics",
+      "price": 4500
+    },
+    {
+      "id": "18",
+      "name": "Formal Shirt",
+      "url": "https://i.pinimg.com/736x/06/98/50/069850714017c4c4aa332559432c4196.jpg",
+      "category": "Clothing",
+      "price": 2200
+    },
+    {
+      "id": "21",
+      "name": "Fiction Book",
+      "url": "https://images.unsplash.com/photo-1512820790803-83ca734da794",
+      "category": "Books",
+      "price": 800
+    },
+    {
+      "id": "7366",
+      "name": "sport",
+      "url": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQwD6WXnwp4BbF9HKe0r06oIEWRP5iH329ENwkKG9v7enPhx1QYqj4-6I4xJsLgwVwkLYDhnz31VIMpmVUM-L5XLB2VpEg2QaSlVAYpEInuzaY2Xvk8J1J4wg",
+      "category": "Shoes",
+      "price": "3000"
+    }
+  ]
+}

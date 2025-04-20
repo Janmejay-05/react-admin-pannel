@@ -3,16 +3,30 @@ import { FaArrowUp } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
 
 import { useDispatch, useSelector } from "react-redux";
-import { dataApi } from "../redux/features/productSlice";
+import { dataApi, deleteData } from "../redux/features/productSlice";
+import axios from "axios";
+import { openUmodel } from "../redux/features/updateModalSlice";
 
 const ProductMain = () => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const product = useSelector((state) => state.data.value);
+  const [allProduct, setAllProduct] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3005/product")
+      .then((res) => setAllProduct(res.data));
+  }, []);
 
   useEffect(() => {
     dispatch(dataApi(page));
   }, [page]);
+
+  function handleDelete(id) {
+    dispatch(deleteData(id));
+    console.log(id);
+  }
   return (
     <div>
       {/* product head */}
@@ -59,10 +73,18 @@ const ProductMain = () => {
               ₹{item.price}
             </p>
             <div className="flex gap-3">
-              <button className="px-4 py-1 bg-emerald-600 text-white rounded-md text-sm hover:bg-emerald-700 transition">
+              <button
+                onClick={() => {
+                  dispatch(openUmodel(item.id));
+                }}
+                className="px-4 py-1 bg-emerald-600 text-white rounded-md text-sm hover:bg-emerald-700 transition"
+              >
                 Edit
               </button>
-              <button className="px-4 py-1 bg-red-500 text-white rounded-md text-sm hover:bg-red-600 transition">
+              <button
+                onClick={() => handleDelete(item.id)}
+                className="px-4 py-1 bg-red-500 text-white rounded-md text-sm hover:bg-red-600 transition"
+              >
                 Delete
               </button>
             </div>
@@ -78,10 +100,10 @@ const ProductMain = () => {
           Prev
         </button>
         <span className="text-sm font-medium text-green-700">
-          Page {page} of 2
+          Page {page} of {Math.ceil(allProduct.length / 4)}
         </span>
         <button
-          disabled={page == 2}
+          disabled={page == Math.ceil(allProduct.length / 4)}
           onClick={() => setPage(page + 1)}
           className="px-3 py-1 rounded bg-emerald-600 text-white hover:bg-emerald-700  mr-[30px]"
         >

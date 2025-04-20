@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { closemodal } from "../redux/features/modalSlice";
-import { addData } from "../redux/features/productSlice";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { closeUmodal } from "../redux/features/updateModalSlice";
+import axios from "axios";
+import { updateData } from "../redux/features/productSlice";
 
-const AddModal = () => {
+const UpdateModdal = () => {
   const [newProduct, setNewProduct] = useState({
+    id: "",
     name: "",
     url: "",
     category: "",
@@ -12,7 +14,8 @@ const AddModal = () => {
   });
   console.log(newProduct);
   const dispatch = useDispatch();
-  function handleAdd() {
+  const ID = useSelector((state) => state.updateproduct.id);
+  function handleUpdate() {
     if (
       newProduct.name == "" ||
       newProduct.url == "" ||
@@ -22,11 +25,23 @@ const AddModal = () => {
       alert("please enter the value of remaining fields");
       return;
     } else {
-      dispatch(addData(newProduct));
-      dispatch(closemodal());
+      dispatch(updateData(newProduct));
+      dispatch(closeUmodal());
     }
   }
 
+  useEffect(() => {
+    axios.get("http://localhost:3005/product/" + `${ID}`).then((res) =>
+      setNewProduct({
+        ...newProduct,
+        id: res.data.id,
+        name: res.data.name,
+        url: res.data.url,
+        category: res.data.category,
+        price: res.data.price,
+      })
+    );
+  }, [ID]);
   return (
     <>
       {/* Main modal */}
@@ -42,13 +57,13 @@ const AddModal = () => {
             {/* Modal header */}
             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Create New Product
+                Update Existing Product
               </h3>
               <button
                 type="button"
                 className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                 data-modal-toggle="crud-modal"
-                onClick={() => dispatch(closemodal())}
+                onClick={() => dispatch(closeUmodal())}
               >
                 <svg
                   className="w-3 h-3"
@@ -152,7 +167,7 @@ const AddModal = () => {
                 </div>
               </div>
               <button
-                onClick={() => handleAdd()}
+                onClick={() => handleUpdate()}
                 type="button"
                 className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 "
               >
@@ -168,7 +183,7 @@ const AddModal = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                Add new product
+                Update Product
               </button>
             </div>
           </div>
@@ -178,4 +193,4 @@ const AddModal = () => {
   );
 };
 
-export default AddModal;
+export default UpdateModdal;

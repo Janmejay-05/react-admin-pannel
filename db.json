@@ -15,13 +15,6 @@
       "price": 8500
     },
     {
-      "id": "14",
-      "name": "Leather Jacket",
-      "url": "https://www.voganow.com/cdn/shop/files/BBGJ-1108-014_2_copy.jpg?v=1740144445&width=600",
-      "category": "Clothing",
-      "price": 12000
-    },
-    {
       "id": "15",
       "name": "Smart Watch",
       "url": "https://www.gonoise.com/cdn/shop/files/1_c95e5561-4f66-413d-b143-42d31821e554.webp?v=1721392308",
@@ -57,11 +50,25 @@
       "price": 800
     },
     {
-      "id": "7366",
-      "name": "sport",
-      "url": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQwD6WXnwp4BbF9HKe0r06oIEWRP5iH329ENwkKG9v7enPhx1QYqj4-6I4xJsLgwVwkLYDhnz31VIMpmVUM-L5XLB2VpEg2QaSlVAYpEInuzaY2Xvk8J1J4wg",
-      "category": "Shoes",
-      "price": "3000"
+      "id": "aaa2",
+      "name": "pants",
+      "url": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSAUGE0JDWciNaB9L1QnQT_lN8ocKknFY4Nw-LG8M_VBuL0rhKz8bBYQjqFGXPfN1WNx1296t9UPPmGJRnkgefAF75DEUZ39POIpB7N5xqA__UhQsOdesZkIw",
+      "category": "cloths",
+      "price": "2000"
+    },
+    {
+      "id": "f03c",
+      "name": "watch",
+      "url": "https://www.casio.com/content/dam/casio/product-info/locales/in/en/timepiece/product/watch/A/ab/abl/abl-100we-1a/assets/ABL-100WE-1A.png.transform/main-visual-sp/image.png",
+      "category": "Electronics",
+      "price": "4000"
+    },
+    {
+      "id": "ae0a",
+      "name": "premium",
+      "url": "https://images.meesho.com/images/products/434094613/83v0e_1200.jpg",
+      "category": "Electronics",
+      "price": "2000"
     }
   ]
 }

@@ -49,7 +49,7 @@ const UpdateModdal = () => {
         id="crud-modal"
         tabIndex={-1}
         aria-hidden="false"
-        className=" overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+        className=" bg-[#000000ba] overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
       >
         <div className="relative top-[150px] left-[500px] p-4 w-full max-w-md max-h-full">
           {/* Modal content */}

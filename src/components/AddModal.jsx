@@ -34,9 +34,9 @@ const AddModal = () => {
         id="crud-modal"
         tabIndex={-1}
         aria-hidden="false"
-        className=" bg-[#000000ba] overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+        className="bg-[#000000ba] overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex justify-center items-center p-4"
       >
-        <div className="relative top-[150px] left-[500px] p-4 w-full max-w-md max-h-full">
+        <div className="relative w-full max-w-md max-h-full">
           {/* Modal content */}
           <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
             {/* Modal header */}
@@ -69,8 +69,8 @@ const AddModal = () => {
               </button>
             </div>
             {/* Modal body */}
-            <form onSubmit={(e) => e.preventDefault} className="p-4 md:p-5">
-              <div className="grid gap-4 mb-4 grid-cols-2">
+            <form onSubmit={(e) => e.preventDefault()} className="p-4 md:p-5">
+              <div className="grid gap-4 mb-4 grid-cols-1 sm:grid-cols-2">
                 <div className="col-span-2">
                   <label
                     htmlFor="name"
@@ -82,16 +82,16 @@ const AddModal = () => {
                     type="text"
                     name="name"
                     id="name"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Type product name"
-                    required=""
+                    required
                     value={newProduct.name}
                     onChange={(e) =>
                       setNewProduct({ ...newProduct, name: e.target.value })
                     }
                   />
                 </div>
-                <div className="col-span-2 sm:col-span-1">
+                <div>
                   <label
                     htmlFor="price"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -102,30 +102,29 @@ const AddModal = () => {
                     type="number"
                     name="price"
                     id="price"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="$2999"
-                    required=""
+                    required
                     value={newProduct.price}
                     onChange={(e) =>
                       setNewProduct({ ...newProduct, price: e.target.value })
                     }
                   />
                 </div>
-                <div className="col-span-2 sm:col-span-1">
+                <div>
                   <label
                     htmlFor="category"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Category
                   </label>
-
                   <input
                     type="text"
-                    name="name"
-                    id="name"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    name="category"
+                    id="category"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Category"
-                    required=""
+                    required
                     value={newProduct.category}
                     onChange={(e) =>
                       setNewProduct({ ...newProduct, category: e.target.value })
@@ -137,12 +136,12 @@ const AddModal = () => {
                     htmlFor="description"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Image Url
+                    Image URL
                   </label>
                   <textarea
                     id="description"
                     rows={4}
-                    className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Write product image url"
                     value={newProduct.url}
                     onChange={(e) =>
@@ -154,7 +153,7 @@ const AddModal = () => {
               <button
                 onClick={() => handleAdd()}
                 type="button"
-                className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 "
+                className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700"
               >
                 <svg
                   className="me-1 -ms-1 w-5 h-5"

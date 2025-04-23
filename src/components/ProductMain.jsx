@@ -50,9 +50,9 @@ const ProductMain = () => {
   return (
     <div>
       {/* product head */}
-      <div className="flex items-center justify-between w-full h-[60px] px-6 bg-white mt-[20px] ">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-4 sm:gap-0 sm:h-[60px] px-4 sm:px-6 bg-white mt-4">
         {/* Search Bar */}
-        <div className="w-[40%]">
+        <div className="w-full sm:w-[40%]">
           <input
             type="text"
             placeholder="Search products..."
@@ -64,12 +64,12 @@ const ProductMain = () => {
         </div>
 
         {/* Filter & Sort */}
-        <div className="flex items-center gap-4 w-[50%] justify-end">
+        <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 sm:gap-4 w-full sm:w-[50%] justify-end">
           <select
             onChange={(e) => {
               dispatch(catProduct(e.target.value));
             }}
-            className="h-10 px-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="h-10 px-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 w-full sm:w-auto"
           >
             <option value="All">All</option>
             <option value="Electronics">Electronics</option>
@@ -80,7 +80,7 @@ const ProductMain = () => {
             onClick={() => {
               dispatch(decrease());
             }}
-            className="flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition"
+            className="flex items-center justify-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition w-full sm:w-auto"
           >
             Sort <FaArrowUp />
           </button>
@@ -88,18 +88,19 @@ const ProductMain = () => {
             onClick={() => {
               dispatch(increase());
             }}
-            className="flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition"
+            className="flex items-center justify-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition w-full sm:w-auto"
           >
             sort <FaArrowDown />
           </button>
         </div>
       </div>
+
       {/* Products */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4 sm:p-6">
         {product.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col h-[400px] items-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition"
+            className="flex flex-col h-auto sm:h-[400px] items-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition"
           >
             <p className="text-sm text-gray-500 mb-1">{item.category}</p>
             <img
@@ -113,7 +114,7 @@ const ProductMain = () => {
             <p className="text-emerald-600 font-bold text-md mb-3">
               ₹{item.price}
             </p>
-            <div className="flex gap-3">
+            <div className="flex gap-3 flex-wrap justify-center">
               <button
                 onClick={() => {
                   dispatch(openUmodel(item.id));
@@ -132,21 +133,23 @@ const ProductMain = () => {
           </div>
         ))}
       </div>
-      <div className=" w-[100%] bg-white rounded-2xl px-4 py-2 flex items-center justify-end space-x-3 mt-[50px]">
+
+      {/* Pagination */}
+      <div className="w-full bg-white rounded-2xl px-4 py-2 flex flex-col sm:flex-row items-center justify-between sm:justify-end gap-4 mt-10">
         <button
           disabled={page == 1}
           onClick={() => setPage(page - 1)}
-          className="px-3 py-1 rounded bg-emerald-600 text-white hover:bg-emerald-700"
+          className="px-3 py-1 rounded bg-emerald-600 text-white hover:bg-emerald-700 disabled:opacity-50"
         >
           Prev
         </button>
-        <span className="text-sm font-medium text-green-700">
+        <span className="text-sm font-medium text-green-700 text-center">
           Page {page} of {Math.ceil(products.length / 4)}
         </span>
         <button
           disabled={page == Math.ceil(products.length / 4)}
           onClick={() => setPage(page + 1)}
-          className="px-3 py-1 rounded bg-emerald-600 text-white hover:bg-emerald-700  mr-[30px]"
+          className="px-3 py-1 rounded bg-emerald-600 text-white hover:bg-emerald-700 disabled:opacity-50"
         >
           Next
         </button>

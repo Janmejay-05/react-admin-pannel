@@ -1,22 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { FaArrowUp } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
+import { FaArrowDown } from "react-icons/fa6";
 
 import { useDispatch, useSelector } from "react-redux";
-import { dataApi, deleteData } from "../redux/features/productSlice";
-import axios from "axios";
+import {
+  catProduct,
+  dataApi,
+  decrease,
+  deleteData,
+  increase,
+  originalData,
+  search,
+} from "../redux/features/productSlice";
+// import axios from "axios";
 import { openUmodel } from "../redux/features/updateModalSlice";
 
 const ProductMain = () => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-  const product = useSelector((state) => state.data.value);
-  const [allProduct, setAllProduct] = useState([]);
+  // const product = useSelector((state) => state.data.value);
+  // const original = useSelector((state) => console.log("original", state));
+  // const cat = useSelector((state) =>
+  //   console.log("category", state.data.category)
+  // );
+  // const searched = useSelector((state) =>
+  //   console.log("searched", state.data.searched)
+  // );
+  const products = useSelector((state) => state.data.sorted);
+  const proPerPage = 4;
+  const start = (page - 1) * proPerPage;
+  const end = start + proPerPage;
+
+  const product = products.slice(start, end);
+  console.log(product);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3005/product")
-      .then((res) => setAllProduct(res.data));
+    dispatch(originalData());
   }, []);
 
   useEffect(() => {
@@ -36,20 +56,41 @@ const ProductMain = () => {
           <input
             type="text"
             placeholder="Search products..."
+            onChange={(e) => {
+              dispatch(search(e.target.value));
+            }}
             className="w-full h-10 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-700"
           />
         </div>
 
         {/* Filter & Sort */}
         <div className="flex items-center gap-4 w-[50%] justify-end">
-          <select className="h-10 px-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          <select
+            onChange={(e) => {
+              dispatch(catProduct(e.target.value));
+            }}
+            className="h-10 px-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          >
             <option value="All">All</option>
             <option value="Electronics">Electronics</option>
             <option value="Clothing">Clothing</option>
             <option value="Books">Books</option>
           </select>
-          <button className="flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition">
+          <button
+            onClick={() => {
+              dispatch(decrease());
+            }}
+            className="flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition"
+          >
             Sort <FaArrowUp />
+          </button>
+          <button
+            onClick={() => {
+              dispatch(increase());
+            }}
+            className="flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition"
+          >
+            sort <FaArrowDown />
           </button>
         </div>
       </div>
@@ -100,10 +141,10 @@ const ProductMain = () => {
           Prev
         </button>
         <span className="text-sm font-medium text-green-700">
-          Page {page} of {Math.ceil(allProduct.length / 4)}
+          Page {page} of {Math.ceil(products.length / 4)}
         </span>
         <button
-          disabled={page == Math.ceil(allProduct.length / 4)}
+          disabled={page == Math.ceil(products.length / 4)}
           onClick={() => setPage(page + 1)}
           className="px-3 py-1 rounded bg-emerald-600 text-white hover:bg-emerald-700  mr-[30px]"
         >

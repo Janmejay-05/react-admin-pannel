@@ -15,7 +15,8 @@ const UpdateModdal = () => {
   console.log(newProduct);
   const dispatch = useDispatch();
   const ID = useSelector((state) => state.updateproduct.id);
-  function handleUpdate() {
+  function handleUpdate(e) {
+    e.preventDefault();
     if (
       newProduct.name == "" ||
       newProduct.url == "" ||
@@ -31,16 +32,18 @@ const UpdateModdal = () => {
   }
 
   useEffect(() => {
-    axios.get("http://localhost:3005/product/" + `${ID}`).then((res) =>
-      setNewProduct({
-        ...newProduct,
-        id: res.data.id,
-        name: res.data.name,
-        url: res.data.url,
-        category: res.data.category,
-        price: res.data.price,
-      })
-    );
+    axios
+      .get("https://data-server-hzpo.onrender.com/product/" + `${ID}`)
+      .then((res) =>
+        setNewProduct({
+          ...newProduct,
+          id: res.data.id,
+          name: res.data.name,
+          url: res.data.url,
+          category: res.data.category,
+          price: res.data.price,
+        })
+      );
   }, [ID]);
   return (
     <>
@@ -84,7 +87,7 @@ const UpdateModdal = () => {
               </button>
             </div>
             {/* Modal body */}
-            <div className="p-4 md:p-5">
+            <form onSubmit={handleUpdate} className="p-4 md:p-5">
               <div className="grid gap-4 mb-4 grid-cols-2">
                 <div className="col-span-2">
                   <label
@@ -166,11 +169,7 @@ const UpdateModdal = () => {
                   />
                 </div>
               </div>
-              <button
-                onClick={() => handleUpdate()}
-                type="button"
-                className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 "
-              >
+              <button className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 ">
                 <svg
                   className="me-1 -ms-1 w-5 h-5"
                   fill="currentColor"
@@ -185,7 +184,7 @@ const UpdateModdal = () => {
                 </svg>
                 Update Product
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>

@@ -1,11 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const api = "http://localhost:3005/product";
+const api = "https://data-server-hzpo.onrender.com/product";
 export const dataApi = createAsyncThunk("dataApi", async (page) => {
   const res = await axios.get(api + `?_page=${page}&_per_page=4`);
   // console.log(res.data.data);
   return res.data.data;
+});
+export const originalData = createAsyncThunk("originalData", async () => {
+  const res = await axios.get(api);
+  return res.data;
 });
 
 export const addData = createAsyncThunk("addData", async (obj) => {
@@ -25,12 +29,49 @@ export const updateData = createAsyncThunk("updateData", async (obj) => {
 
 const initialState = {
   value: [],
+  original: [],
+  searched: [],
+  sorted: [],
+  category: [],
 };
 
 export const productSlice = createSlice({
   name: "counter",
   initialState,
-  reducers: {},
+  reducers: {
+    search: (state, action) => {
+      state.searched = state.category.filter((e) => {
+        if (
+          e.name
+            .toLowerCase()
+            .trim()
+            .includes(action.payload.toLowerCase().trim())
+        ) {
+          return e;
+        }
+      });
+      state.sorted = [...state.searched];
+    },
+    increase: (state) => {
+      state.sorted = state.searched.sort((a, b) => a.price - b.price);
+    },
+    decrease: (state) => {
+      state.sorted = state.searched.sort((a, b) => b.price - a.price);
+    },
+    catProduct: (state, action) => {
+      if (action.payload == "All") {
+        state.category = [...state.original];
+        state.searched = [...state.category];
+        state.sorted = [...state.searched];
+      } else {
+        state.category = state.original.filter(
+          (e) => action.payload === e.category
+        );
+        state.searched = [...state.category];
+        state.sorted = [...state.searched];
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(dataApi.fulfilled, (state, action) => {
       // console.log("action", action.payload);
@@ -45,12 +86,20 @@ export const productSlice = createSlice({
     builder.addCase(deleteData.fulfilled, (state, action) => {
       console.log("delete", action.payload);
     });
-    builder.addCase(updateData.fulfilled, (State, action) => {
+    builder.addCase(updateData.fulfilled, (state, action) => {
       console.log("Update", action.payload);
+    });
+    builder.addCase(originalData.fulfilled, (state, action) => {
+      state.original = [...action.payload];
+      state.category = [...state.original];
+      state.searched = [...state.category];
+      state.sorted = [...state.searched];
     });
   },
 });
 
 // Action creators are generated for each case reducer function
+
+export const { search, increase, decrease, catProduct } = productSlice.actions;
 
 export default productSlice.reducer;

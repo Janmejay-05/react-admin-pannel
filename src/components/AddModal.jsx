@@ -69,7 +69,7 @@ const AddModal = () => {
               </button>
             </div>
             {/* Modal body */}
-            <div className="p-4 md:p-5">
+            <form onSubmit={(e) => e.preventDefault} className="p-4 md:p-5">
               <div className="grid gap-4 mb-4 grid-cols-2">
                 <div className="col-span-2">
                   <label
@@ -170,7 +170,7 @@ const AddModal = () => {
                 </svg>
                 Add new product
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>

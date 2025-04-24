@@ -6,7 +6,6 @@ import { FaArrowDown } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import {
   catProduct,
-  dataApi,
   decrease,
   deleteData,
   increase,
@@ -33,15 +32,15 @@ const ProductMain = () => {
   const end = start + proPerPage;
 
   const product = products.slice(start, end);
-  console.log(product);
+  // console.log(product);
 
   useEffect(() => {
     dispatch(originalData());
   }, []);
 
-  useEffect(() => {
-    dispatch(dataApi(page));
-  }, [page]);
+  // useEffect(() => {
+  //   dispatch(dataApi(page));
+  // }, [page]);
 
   function handleDelete(id) {
     dispatch(deleteData(id));

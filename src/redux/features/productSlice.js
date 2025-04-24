@@ -2,11 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const api = "https://data-server-hzpo.onrender.com/product";
-export const dataApi = createAsyncThunk("dataApi", async (page) => {
-  const res = await axios.get(api + `?_page=${page}&_per_page=4`);
-  // console.log(res.data.data);
-  return res.data.data;
-});
+// export const dataApi = createAsyncThunk("dataApi", async (page) => {
+//   const res = await axios.get(api + `?_page=${page}&_per_page=4`);
+//   // console.log(res.data.data);
+//   return res.data.data;
+// });
 export const originalData = createAsyncThunk("originalData", async () => {
   const res = await axios.get(api);
   return res.data;
@@ -14,7 +14,7 @@ export const originalData = createAsyncThunk("originalData", async () => {
 
 export const addData = createAsyncThunk("addData", async (obj) => {
   const res = await axios.post(api, obj);
-  console.log("response", res.data);
+  // console.log("response", res.data);
   return res.data;
 });
 
@@ -73,23 +73,37 @@ export const productSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(dataApi.fulfilled, (state, action) => {
-      // console.log("action", action.payload);
+    // builder.addCase(dataApi.fulfilled, (state, action) => {
+    //   // console.log("action", action.payload);
 
-      state.value = [...action.payload];
-      // console.log("state", state.value);
-    });
+    //   state.value = [...action.payload];
+    //   // console.log("state", state.value);
+    // });
 
     builder.addCase(addData.fulfilled, (state, action) => {
-      console.log("action", action.payload);
+      state.original.push(action.payload);
+      state.category = [...state.original];
+      state.searched = [...state.category];
+      state.sorted = [...state.searched];
     });
     builder.addCase(deleteData.fulfilled, (state, action) => {
-      console.log("delete", action.payload);
+      // console.log("delete", action.meta.arg);
+      state.original = state.original.filter((e) => e.id !== action.meta.arg);
+      state.category = [...state.original];
+      state.searched = [...state.category];
+      state.sorted = [...state.searched];
     });
     builder.addCase(updateData.fulfilled, (state, action) => {
-      console.log("Update", action.payload);
+      // console.log("update",action.payload);
+      state.original = state.original.map((e) =>
+        e.id == action.payload.id ? action.payload : e
+      );
+      state.category = [...state.original];
+      state.searched = [...state.category];
+      state.sorted = [...state.searched];
     });
     builder.addCase(originalData.fulfilled, (state, action) => {
+      console.log("original", action.payload);
       state.original = [...action.payload];
       state.category = [...state.original];
       state.searched = [...state.category];

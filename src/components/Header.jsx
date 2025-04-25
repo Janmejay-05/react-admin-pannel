@@ -15,7 +15,10 @@ const Header = () => {
       </div>
 
       {/* Right section */}
-      <div>
+      <div className="flex items-center gap-4">
+        <button className="bg-emerald-500 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-emerald-600 transition">
+          Logout
+        </button>
         <button
           onClick={() => dispatch(addshow())}
           className="bg-emerald-600 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { closemodal } from "../redux/features/modalSlice";
 import { addData } from "../redux/features/productSlice";
@@ -26,6 +26,10 @@ const AddModal = () => {
       dispatch(closemodal());
     }
   }
+
+  useEffect(() => {
+    setNewProduct({ ...newProduct, category: "Electronics" });
+  }, []);
 
   return (
     <>
@@ -118,18 +122,22 @@ const AddModal = () => {
                   >
                     Category
                   </label>
-                  <input
-                    type="text"
-                    name="category"
+                  <select
                     id="category"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="Category"
-                    required
+                    name="category"
                     value={newProduct.category}
                     onChange={(e) =>
                       setNewProduct({ ...newProduct, category: e.target.value })
                     }
-                  />
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    required
+                  >
+                    <option selected value="Electronics">
+                      Electronics
+                    </option>
+                    <option value="Books">Books</option>
+                    <option value="Clothing">Clothing</option>
+                  </select>
                 </div>
                 <div className="col-span-2">
                   <label

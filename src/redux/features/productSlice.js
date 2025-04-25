@@ -62,10 +62,11 @@ export const productSlice = createSlice({
       if (action.payload == "All") {
         state.category = [...state.original];
         state.searched = [...state.category];
+        state.category = [...state.searched];
         state.sorted = [...state.searched];
       } else {
         state.category = state.original.filter(
-          (e) => action.payload === e.category
+          (e) => action.payload.toLowerCase() === e.category.toLowerCase()
         );
         state.searched = [...state.category];
         state.sorted = [...state.searched];

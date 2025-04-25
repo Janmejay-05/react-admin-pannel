@@ -26,9 +26,9 @@ const Login = () => {
     <div
       tabIndex={-1}
       aria-hidden="false"
-      className="fixed inset-0 z-50 flex justify-center items-center bg-[#000000ba]"
+      className="fixed inset-0 z-50 flex justify-center items-center bg-[#000000ba] px-4 sm:px-6"
     >
-      <div className="relative p-4 w-full max-w-md">
+      <div className="relative w-full max-w-md sm:max-w-sm md:max-w-md lg:max-w-lg">
         {/* Modal content */}
         <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
           {/* Modal header */}
@@ -100,15 +100,13 @@ const Login = () => {
                   }}
                 />
               </div>
-              <div className="flex justify-between">
-                <div className="flex items-start">
-                  <div className="flex items-center h-5">
-                    <input
-                      id="remember"
-                      type="checkbox"
-                      className="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600"
-                    />
-                  </div>
+              <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3 sm:gap-0">
+                <div className="flex items-center">
+                  <input
+                    id="remember"
+                    type="checkbox"
+                    className="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600"
+                  />
                   <label
                     htmlFor="remember"
                     className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -129,7 +127,7 @@ const Login = () => {
               >
                 Login to your account
               </button>
-              <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
+              <div className="text-sm font-medium text-gray-500 dark:text-gray-300 text-center">
                 Not registered?{" "}
                 <a
                   onClick={() => dispatch(openpage())}

@@ -2,6 +2,7 @@ import React from "react";
 import { RiAdminFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { addshow } from "../redux/features/modalSlice";
+import { logout } from "../redux/features/adminSlice";
 const Header = () => {
   const dispatch = useDispatch();
   return (
@@ -16,7 +17,10 @@ const Header = () => {
 
       {/* Right section */}
       <div className="flex items-center gap-4">
-        <button className="bg-emerald-500 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-emerald-600 transition">
+        <button
+          onClick={() => dispatch(logout())}
+          className="bg-emerald-500 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-emerald-600 transition"
+        >
           Logout
         </button>
         <button

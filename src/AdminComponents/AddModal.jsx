@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { closemodal } from "../redux/features/modalSlice";
+// import { closemodal } from "../redux/features/modalSlice";
 import { addData } from "../redux/features/productSlice";
+import { Link, useNavigate } from "react-router-dom";
 
 const AddModal = () => {
   const [newProduct, setNewProduct] = useState({
@@ -10,6 +11,7 @@ const AddModal = () => {
     category: "",
     price: "",
   });
+  const navigate = useNavigate();
   console.log(newProduct);
   const dispatch = useDispatch();
   function handleAdd() {
@@ -23,7 +25,7 @@ const AddModal = () => {
       return;
     } else {
       dispatch(addData(newProduct));
-      dispatch(closemodal());
+      navigate("/admin");
     }
   }
 
@@ -48,29 +50,30 @@ const AddModal = () => {
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                 Create New Product
               </h3>
-              <button
-                type="button"
-                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                data-modal-toggle="crud-modal"
-                onClick={() => dispatch(closemodal())}
-              >
-                <svg
-                  className="w-3 h-3"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 14 14"
+              <Link to={"/admin"}>
+                <button
+                  type="button"
+                  className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                  data-modal-toggle="crud-modal"
                 >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                  />
-                </svg>
-                <span className="sr-only">Close modal</span>
-              </button>
+                  <svg
+                    className="w-3 h-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 14 14"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                    />
+                  </svg>
+                  <span className="sr-only">Close modal</span>
+                </button>
+              </Link>
             </div>
             {/* Modal body */}
             <form onSubmit={(e) => e.preventDefault()} className="p-4 md:p-5">

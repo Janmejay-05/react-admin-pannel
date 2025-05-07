@@ -9,7 +9,6 @@ export const updateModalSlice = createSlice({
   initialState,
   reducers: {
     openUmodel: (state, action) => {
-      state.value = true;
       state.id = action.payload;
     },
     closeUmodal: (state) => {

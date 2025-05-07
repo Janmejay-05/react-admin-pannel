@@ -3,6 +3,8 @@ import product from "./features/productSlice";
 import modal from "./features/modalSlice";
 import updateModal from "./features/updateModalSlice";
 import isauth from "./features/adminSlice";
+import userProduct from "./features/userProductSlice";
+import cartSlice from "./features/cartSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +12,7 @@ export const store = configureStore({
     addproduct: modal,
     updateproduct: updateModal,
     auth: isauth,
+    user: userProduct,
+    cart: cartSlice,
   },
 });

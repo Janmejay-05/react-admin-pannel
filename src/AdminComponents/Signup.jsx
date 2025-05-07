@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { AddData, closepage } from "../redux/features/adminSlice";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [newDetails, setNewDetails] = useState({
     username: "",
     password: "",
@@ -16,7 +18,7 @@ const Signup = () => {
       return;
     } else {
       dispatch(AddData(newDetails));
-      dispatch(closepage());
+      navigate("/adminlogin");
     }
   }
 

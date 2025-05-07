@@ -14,6 +14,7 @@ import {
 } from "../redux/features/productSlice";
 // import axios from "axios";
 import { openUmodel } from "../redux/features/updateModalSlice";
+import { Link } from "react-router-dom";
 
 const ProductMain = () => {
   const [page, setPage] = useState(1);
@@ -114,14 +115,16 @@ const ProductMain = () => {
               ₹{item.price}
             </p>
             <div className="flex gap-3 flex-wrap justify-center">
-              <button
-                onClick={() => {
-                  dispatch(openUmodel(item.id));
-                }}
-                className="px-4 py-1 bg-emerald-600 text-white rounded-md text-sm hover:bg-emerald-700 transition"
-              >
-                Edit
-              </button>
+              <Link to={"/adminupdate"}>
+                <button
+                  onClick={() => {
+                    dispatch(openUmodel(item.id));
+                  }}
+                  className="px-4 py-1 bg-emerald-600 text-white rounded-md text-sm hover:bg-emerald-700 transition"
+                >
+                  Edit
+                </button>
+              </Link>
               <button
                 onClick={() => handleDelete(item.id)}
                 className="px-4 py-1 bg-red-500 text-white rounded-md text-sm hover:bg-red-600 transition"

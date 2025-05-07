@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
+
 // import { data } from "react-router-dom";
 
 const api = "https://data-server-hzpo.onrender.com/admin";
@@ -55,6 +57,7 @@ export const adminSlice = createSlice({
       if (bool == true) {
         state.isAuth = true;
         alert("successfully logd in");
+        // return <Navigate to={"/admin"} />;
       } else {
         alert("invalid username or password");
         return;
